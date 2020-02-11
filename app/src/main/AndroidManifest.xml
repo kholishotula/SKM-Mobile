@@ -21,12 +21,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".IsiRespondenActivity"
-                  android:windowSoftInputMode="stateVisible|adjustPan"
+                  android:windowSoftInputMode="stateHidden|adjustPan"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
         </activity>
         <activity android:name=".PilihSurveiActivity"
-                  android:windowSoftInputMode="stateVisible|adjustPan"
+                  android:windowSoftInputMode="stateHidden|adjustPan"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
                 <meta-data
@@ -35,12 +35,12 @@
                 </meta-data>
         </activity>
         <activity android:name=".IsiSurveiActivity"
-                  android:windowSoftInputMode="stateVisible|adjustPan"
+                  android:windowSoftInputMode="stateHidden|adjustPan"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
         </activity>
         <activity android:name=".PanduanActivity"
-                  android:windowSoftInputMode="stateVisible|adjustPan"
+                  android:windowSoftInputMode="stateHidden|adjustPan"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
         </activity>

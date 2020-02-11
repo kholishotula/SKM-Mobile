@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -51,26 +50,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuItem.setChecked(true);
 
         switch (id){
-            case R.id.homeMenu :
-                Intent intent1 = new Intent(this, MainActivity.class);
-                startActivity(intent1);
-                break;
             case R.id.panduan :
                 Intent intent = new Intent(this, PanduanActivity.class);
                 startActivity(intent);
                 break;
             case R.id.kuesLPSE :
-                Intent int1 = new Intent (this, IsiRespondenActivity.class);
+                Intent int1 = new Intent(this, IsiRespondenActivity.class);
                 int1.putExtra("msg", "1");
                 startActivity(int1);
                 break;
             case R.id.kuesPPID :
-                Intent int2 = new Intent (this, IsiRespondenActivity.class);
+                Intent int2 = new Intent(this, IsiRespondenActivity.class);
                 int2.putExtra("msg", "2");
                 startActivity(int2);
                 break;
             case R.id.kuesSandi :
-                Intent int3 = new Intent (this, IsiRespondenActivity.class);
+                Intent int3 = new Intent(this, IsiRespondenActivity.class);
                 int3.putExtra("msg", "3");
                 startActivity(int3);
                 break;

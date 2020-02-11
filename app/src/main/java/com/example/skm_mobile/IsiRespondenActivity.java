@@ -26,14 +26,17 @@ public class IsiRespondenActivity extends AppCompatActivity {
     EditText nama,instansi;
     RadioGroup jabatan,jenis_kelamin,pendidikan_terakhir;
     RadioButton jb,jk,pt;
+    private String id_layanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getIntent().getStringExtra("msg").equals("1")) {
+        id_layanan = getIntent().getStringExtra("msg");
+
+        if (id_layanan.equals("1")) {
             setContentView(R.layout.activity_responden_lpse);
-        } else if (getIntent().getStringExtra("msg").equals("2") || getIntent().getStringExtra("msg").equals("3")) {
+        } else if (id_layanan.equals("2") || id_layanan.equals("3")) {
             setContentView(R.layout.activity_responden_sandi);
         }
 
@@ -60,29 +63,32 @@ public class IsiRespondenActivity extends AppCompatActivity {
         jk = findViewById(jenis_kelamin.getCheckedRadioButtonId());
         pt = findViewById(pendidikan_terakhir.getCheckedRadioButtonId());
 
-        String url_insert = "http://192.168.110.111/android/storeResponden.php";
+        String url_insert = "http://skm.diskominfotik.blitarkota.go.id/apk/android/storeResponden.php";
         String name=  URLEncoder.encode(nama.getText().toString(),"UTF8");
         String grade = URLEncoder.encode(jb.getText().toString(),"UTF8");
         String gender = URLEncoder.encode(jk.getText().toString(),"UTF8");
         String education = URLEncoder.encode(pt.getText().toString(),"UTF8");
         String company;
 
-        if(getIntent().getStringExtra("msg").equals("1")) {
+        if(id_layanan.equals("1")) {
             instansi = findViewById(R.id.editText2);
             company = URLEncoder.encode(instansi.getText().toString(),"UTF8");
             url_insert = url_insert + "?nama=" + name + "&asal=" + "" + "&pekerjaan=" + grade + "&instansi=" + company + "&jenis=" + gender + "&pendidikan=" + education;
             Log.e("URL", url_insert);
         }
-        else if(getIntent().getStringExtra("msg").equals("2") || getIntent().getStringExtra("msg").equals("3")) {
-            EditText alamat = findViewById(R.id.editText4);
+        else if(id_layanan.equals("2") || id_layanan.equals("3")) {
+            String asal = jb.getText().toString();
+            if(asal.equals("Luar Kota Blitar")){
+                EditText alamat = findViewById(R.id.editText4);
+                asal = alamat.getText().toString();
+            }
             EditText pekerjaan = findViewById(R.id.editText2);
             instansi = findViewById(R.id.editText3);
 
-            String address = URLEncoder.encode(alamat.getText().toString(),"UTF8");
             String job = URLEncoder.encode(pekerjaan.getText().toString(),"UTF8");
             company = URLEncoder.encode(instansi.getText().toString(),"UTF8");
 
-            url_insert = url_insert + "?nama=" + name + "&asal=" + address + "&pekerjaan=" + job + "&instansi=" + company + "&jenis=" + gender + "&pendidikan=" + education;
+            url_insert = url_insert + "?nama=" + name + "&asal=" + asal + "&pekerjaan=" + job + "&instansi=" + company + "&jenis=" + gender + "&pendidikan=" + education;
             Log.e("URL", url_insert);
         }
         StringRequest stringRequest= new StringRequest(com.android.volley.Request.Method.GET, url_insert, new Response.Listener<String>() {
@@ -100,7 +106,7 @@ public class IsiRespondenActivity extends AppCompatActivity {
             }
         );
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                50000,
+                300000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue= Volley.newRequestQueue(this);
@@ -115,8 +121,9 @@ public class IsiRespondenActivity extends AppCompatActivity {
     public void do_next_activity(String id)
     {
         Intent intent = new Intent(IsiRespondenActivity.this, IsiSurveiActivity.class);
-        intent.putExtra("id_layanan", getIntent().getStringExtra("msg"));
+        intent.putExtra("id_layanan", id_layanan);
         intent.putExtra("id_responden", id);
         startActivity(intent);
+        finish();
     }
 }

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/LinearLayout1"
@@ -217,11 +218,11 @@
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="135dp"
-            android:layout_marginLeft="135dp"
+            android:layout_marginStart="137dp"
+            android:layout_marginLeft="137dp"
             android:layout_marginTop="70dp"
-            android:layout_marginEnd="138dp"
-            android:layout_marginRight="138dp"
+            android:layout_marginEnd="136dp"
+            android:layout_marginRight="136dp"
             android:layout_marginBottom="36dp"
             android:text="@string/btn_next"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -11,7 +11,13 @@
             VALUES ('$id_resp', '$id_kues', '$skor', '$kritik', '$tgl')";
 	
 	if(mysqli_query($database, $sql)){
-        echo 'Data Submit';
+        $result = array();
+        $getId = mysqli_query($database, "SELECT id_isi_submit FROM `isi_submit` ORDER BY id_isi_submit DESC LIMIT 1");
+        while ($row = mysqli_fetch_array($getId, MYSQLI_ASSOC)) {
+            array_push($result,array(
+                "id_isi_submit" => $row['id_isi_submit']));
+        };
+        echo json_encode( $result );
     }
     else{
         echo 'Gagal';
